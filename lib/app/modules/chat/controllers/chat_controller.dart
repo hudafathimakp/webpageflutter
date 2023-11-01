@@ -24,7 +24,7 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     connect();
-    socket.on('chat', (data) {
+    socket.on('message', (data) {
       receiveMessage(data);
     });
 
