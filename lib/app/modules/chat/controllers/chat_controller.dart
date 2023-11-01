@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_webpage/app/api/api.dart';
 import 'package:flutter_webpage/app/model/user_response.dart';
@@ -43,10 +42,15 @@ class ChatController extends GetxController {
       'autoConnect': true,
     });
     socket.connect();
-    // socket.emit(
-    //   "signin","hi Huda"
-    // );
-    socket.onConnect((data) => print("connected"));
+    socket.emit("signin", Session.userId);
+    socket.onConnect((data) {
+      print("Connected");
+      socket.on("message", (msg) {
+        receiveMessage( msg["message"]);
+        // scrollController.animateTo(scrollController.position.maxScrollExtent,
+            // duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      });
+    });
   }
 
   // void connect(int sourchatId) {
