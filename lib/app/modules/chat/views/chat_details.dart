@@ -26,7 +26,7 @@ class ChatDetails extends GetView<ChatDetailsController> {
                 height: 50,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: HeaderText(
                   name: controller.argumet.name,
                   lastSeen: "Online",
@@ -60,11 +60,7 @@ class ChatDetails extends GetView<ChatDetailsController> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ChatText(
-                                    type:controller.messages[index].type == "source"?'user':'',
-
-                                    //  index % 2 == 0
-                                    //     ? controller.type.value
-                                    // : 'Type',
+                                    type:controller.messages[index].type == "sender"?'user':'reciver',
                                     time: "10.00",
                                     massage: controller.messages[index].message!),
                               );
@@ -97,7 +93,7 @@ class ChatDetails extends GetView<ChatDetailsController> {
                                   Session.userId.toString(),
                                   controller.argumet.id);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.send,
                               color: Colors.black,
                             )

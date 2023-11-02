@@ -1,40 +1,21 @@
-
 import 'package:flutter_webpage/app/api/api.dart';
 import 'package:flutter_webpage/app/model/user_response.dart';
 import 'package:flutter_webpage/app/session.dart';
 import 'package:get/get.dart';
-
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatController extends GetxController {
-  
-  // final RxString type = ''.obs;
+
   var isLoading = false.obs;
   RxList<UserModel> userList = <UserModel>[].obs;
    late IO.Socket socket;
-  // io.Socket? socket;
-
-  //  final socketService = Get.find<SocketService>();
-  // RxList<String> messages = <String>[].obs;
-  // TextEditingController messageController = TextEditingController();
-  // final messageList = ['hey', 'hello', 'how are you?', 'good'];
 
   @override
   void onInit() {
     connect();
-    // socket.on('message', (data) {
-    //   receiveMessage(data);
-    // });
-
-    // usertype();
     userLists();
     super.onInit();
   }
-
-  // usertype() {
-  //   type.value = 'user';
-  // }
 
   void connect() {
     socket = IO.io('http://192.168.29.248:5000/', <String, dynamic>{
@@ -54,7 +35,7 @@ class ChatController extends GetxController {
   }
 
   // void connect(int sourchatId) {
-  //   socket = IO.io("http://192.168.29.248:9001/", <String, dynamic>{
+  //   socket = IO.io("http://192.168.29.248:5000/", <String, dynamic>{
   //     "transports": ["websocket"],
   //     "autoConnect": false,
   //   });
@@ -72,12 +53,6 @@ class ChatController extends GetxController {
   //   print(" isconnect " + socket.connected.toString());
   // }
 
-  // @override
-  // void onClose() {
-  //   // socket?.dispose();
-  //   socketService.socket?.off('chat');
-  //   super.onClose();
-  // }
 
   void userLists() async {
     isLoading(true);
@@ -97,25 +72,4 @@ class ChatController extends GetxController {
     }
   }
 
-//  void setMessage(String type, msg) {
-//     MessageModel messageModel = MessageModel(
-//         type: type,
-//         message: msg,
-//         time: DateTime.now().toString().substring(10, 16));
-//     messages.add(messageModel);
-//     update();
-//   }
-
-
-  // void sendMessage(String message, int sourceId, int targetId) {
-  //   if (message.isNotEmpty) {
-  //     messages.add(message);
-  //     socket.emit('message', {"message": message, "sourceId": sourceId, "targetId": targetId});
-  //     messageController.clear();
-  //   }
-  // }
-
-  // void receiveMessage(String message) {
-  //   messages.add("Other: $message");
-  // }
 }
