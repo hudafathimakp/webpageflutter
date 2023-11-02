@@ -9,6 +9,7 @@ class ChatDetailsController extends GetxController {
   final socketService = Get.find<ChatController>();
   // RxList<String> messages = <String>[].obs;
 
+ DateTime currentDate = DateTime.now();
   TextEditingController messageController = TextEditingController();
   final argumet = Get.arguments;
 
@@ -48,7 +49,7 @@ class ChatDetailsController extends GetxController {
     update();
   }
 
-  void sendMessage(String message, sourceId, targetId) {
+  void sendMessage(String message, sourceId, targetId,) {
     if (message.isNotEmpty) {
       setMessage("sender", message);
       // messages.add(message);

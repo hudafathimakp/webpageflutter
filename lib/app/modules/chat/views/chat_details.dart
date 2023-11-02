@@ -60,9 +60,13 @@ class ChatDetails extends GetView<ChatDetailsController> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ChatText(
-                                    type:controller.messages[index].type == "sender"?'user':'reciver',
-                                    time: "10.00",
-                                    massage: controller.messages[index].message!),
+                                    type: controller.messages[index].type ==
+                                            "sender"
+                                        ? 'user'
+                                        : 'reciver',
+                                    time: controller.messages[index].time!,
+                                    massage:
+                                        controller.messages[index].message!),
                               );
                             },
                             itemCount: controller.messages.length,
