@@ -32,7 +32,7 @@ class ChatView extends GetView<ChatController> {
                   tittle: controller.userList[index].name,
                   subtittle: controller.userList[index].mobile,
                   onpress: () {
-                    Get.toNamed(Routes.CHATDETAILS);
+                    Get.toNamed(Routes.CHATDETAILS,arguments:controller.userList[index] );
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(builder: (context) => const ChatDetails()),

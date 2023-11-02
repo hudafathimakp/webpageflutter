@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webpage/app/modules/chat/controllers/chat_controller.dart';
+
+import 'package:flutter_webpage/app/modules/chat/controllers/chat_details_controller.dart';
 import 'package:flutter_webpage/app/modules/desktopscreen/views/desktopscreen_view.dart';
+import 'package:flutter_webpage/app/session.dart';
 import 'package:flutter_webpage/common_widget/chat_textfeild.dart';
 import 'package:flutter_webpage/common_widget/svg_widget.dart';
 
@@ -9,7 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../../responsive.dart';
 
-class ChatDetails extends GetView<ChatController> {
+class ChatDetails extends GetView<ChatDetailsController> {
   ChatDetails({super.key});
 
   @override
@@ -22,10 +24,10 @@ class ChatDetails extends GetView<ChatController> {
             const SizedBox(
               height: 50,
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: HeaderText(
-                name: "Vysakh",
+                name: controller.argumet.name,
                 lastSeen: "Online",
               ),
             ),
@@ -89,7 +91,9 @@ class ChatDetails extends GetView<ChatController> {
                           onPressed: () {
                             FocusScope.of(context).unfocus();
                             controller
-                                .sendMessage(controller.messageController.text);
+                                .sendMessage(controller.messageController.text,Session.userId.toString(),controller.argumet.id
+                                
+                                );
                           },
                           icon: Icon(
                             Icons.send,
