@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webpage/app/model/chat_model.dart';
 import 'package:flutter_webpage/app/modules/chat/controllers/chat_controller.dart';
 import 'package:get/get.dart';
 
@@ -8,11 +9,12 @@ class ChatDetailsController extends GetxController {
   final RxString type = ''.obs;
   // var isLoading = false.obs;
   // RxList<UserModel> userList = <UserModel>[].obs;
-
+ RxList<MessageModel> messages = RxList<MessageModel>();
   // io.Socket? socket;
 
   final socketService = Get.find<ChatController>();
-  RxList<String> messages = <String>[].obs;
+  // RxList<String> messages = <String>[].obs;
+
   TextEditingController messageController = TextEditingController();
   final messageList = ['hey', 'hello', 'how are you?', 'good'];
   final argumet = Get.arguments;
@@ -20,7 +22,8 @@ class ChatDetailsController extends GetxController {
   @override
   void onInit() {
     socketService.socket.on('message', (msg) {
-      receiveMessage(msg["message"]);
+       setMessage("destination", msg["message"]);
+      // receiveMessage(msg["message"]);
     });
     usertype();
     super.onInit();
@@ -90,27 +93,28 @@ class ChatDetailsController extends GetxController {
   //   }
   // }
 
-//  void setMessage(String type, msg) {
-//     MessageModel messageModel = MessageModel(
-//         type: type,
-//         message: msg,
-//         time: DateTime.now().toString().substring(10, 16));
-//     messages.add(messageModel);
-//     update();
-//   }
+ void setMessage(String type, msg) {
+    MessageModel messageModel = MessageModel(
+        type: type,
+        message: msg,
+        time: DateTime.now().toString().substring(10, 16));
+    messages.add(messageModel);
+    update();
+  }
 
   void sendMessage(String message, sourceId, targetId) {
     if (message.isNotEmpty) {
-      messages.add(message);
+      setMessage("source", message);
+      // messages.add(message);
       socketService.socket.emit('message',
           {"message": message, "sourceId": sourceId, "targetId": targetId});
       messageController.clear();
     }
   }
 
-  void receiveMessage(String message) {
-    messages.add("Other: $message");
-  }
+  // void receiveMessage(String message) {
+  //   messages.add("Other: $message",);
+  // }
 
   @override
   void onClose() {
