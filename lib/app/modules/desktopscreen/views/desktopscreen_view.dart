@@ -203,10 +203,12 @@ class ChatType extends StatelessWidget {
 
 class HeaderText extends StatelessWidget {
   final String name, lastSeen;
+  
   const HeaderText({
     super.key,
     required this.name,
     required this.lastSeen,
+
   });
 
   @override

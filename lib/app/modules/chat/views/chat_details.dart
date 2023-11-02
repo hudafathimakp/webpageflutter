@@ -28,6 +28,7 @@ class ChatDetails extends GetView<ChatDetailsController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: HeaderText(
+                  
                   name: controller.argumet.name,
                   lastSeen: "Online",
                 ),
